@@ -1,0 +1,20 @@
+diff -urN build-tree.orig/mod_ldap_cfg/mod_ldap_cfg.c build-tree/mod_ldap_cfg/mod_ldap_cfg.c
+--- build-tree.orig/mod_ldap_cfg/mod_ldap_cfg.c	Fri Sep  2 05:09:32 2005
++++ build-tree/mod_ldap_cfg/mod_ldap_cfg.c	Fri Sep  2 05:09:51 2005
+@@ -983,14 +983,14 @@
+                   "ldap_initialize( uri => \"%s\" )\n",
+                   cfg->uri );
+ 
+-          rc = ldap_initialize( ldap_rec_ptr, cfg->uri );
++          rc = ldap_initialize( &ldap_rec_ptr, cfg->uri );
+           if( rc != LDAP_SUCCESS )
+           {
+                ERROR( "Could not create LDAP session handle (%d): %s\n",
+                       rc, ldap_err2string(rc) );
+                return NULL;
+           }
+-          return *ldap_rec_ptr;
++          return ldap_rec_ptr;
+      }
+      else
+      {

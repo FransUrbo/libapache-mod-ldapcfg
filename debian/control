@@ -1,0 +1,28 @@
+Source: libapache-mod-ldapcfg
+Section: web
+Priority: optional
+Maintainer: Ryszard Lach <rla@debian.org>
+Build-Depends: debhelper (>= 4.0.2), apache2-threaded-dev (>= 2.2.3-3), apache-dev (>= 1.3.26), libldap2-dev | libldap2.2-dev, libsasl2-dev
+Standards-Version: 3.6.1
+
+Package: libapache-mod-ldapcfg
+Architecture: any
+Depends: apache-common (>= 1.3.26), ${shlibs:Depends}
+Description: LDAP configuration module for Apache
+ This module is used to dynamically query configuration directives from
+ an LDAP directory on server startup. Useful for distributed
+ configuration management.
+ .
+ For Apache 2, use the libapache2-mod-ldapcfg package.
+
+Package: libapache2-mod-ldapcfg
+Architecture: any
+Depends: apache2.2-common (>= 2.2.3), ${shlibs:Depends}
+Conflicts: libapache2-mod-vhost-ldap
+Description: LDAP configuration module for Apache 2
+ This module is used to dynamically query configuration directives from
+ an LDAP directory on server startup. Useful for distributed
+ configuration management.
+ .
+ For Apache 1, use the libapache2-mod-ldapcfg package.
+
