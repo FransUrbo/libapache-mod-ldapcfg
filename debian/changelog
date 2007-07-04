@@ -2,8 +2,9 @@ libapache-mod-ldapcfg (1.0-5) unstable; urgency=low
 
   * Fix location of module in mod_ldap_cfg.load.
   * Lot's of Apache2 API changes fixed.
+  * Mark mod_ldap_cfg.{conf,load} as config files.
 
- -- Turbo Fredriksson <turbo@debian.org>  Wed,  4 Jul 2007 11:43:42 +0200
+ -- Turbo Fredriksson <turbo@debian.org>  Wed,  4 Jul 2007 16:18:53 +0200
 
 libapache-mod-ldapcfg (1.0-4) unstable; urgency=low
 
