@@ -15,10 +15,10 @@ build-stamp: patch
 	dh_testdir
 
 	@(cd build-tree/mod_ldap_cfg/ && \
-	  $(MAKE) APXS=/usr/bin/apxs && \
+	  /usr/bin/apxs -c -Wc,-g -l ldap mod_ldap_cfg.c && \
 	  mv mod_ldap_cfg.so ../mod_ldap_cfg.so-apache1 && \
 	  $(MAKE) clean && \
-	  $(MAKE) APXS=/usr/bin/apxs2 && \
+	  /usr/bin/apxs2 -c -Wc,-g -l ldap mod_ldap_cfg.c && \
 	  mv .libs/mod_ldap_cfg.so ../mod_ldap_cfg.so-apache2 )
 
 	touch build-stamp
