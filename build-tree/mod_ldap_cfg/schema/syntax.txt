@@ -1,0 +1,285 @@
+RawArg = RawArg ApacheArg [options]
+SectionName = Specifies name of section: <name></name>
+SectionArg = Optional argument to be used in section
+
+AcceptFilter = AcceptFilter on|off
+AcceptMutex = AcceptMutex uslock|pthread|sysvsem|fcntl|flock|os2sem|tpfcore|none|default
+AccessConfig = AccessConfig file-path|directory-path
+AccessFileName = AccessFileName filename [filename] ...
+AddDefaultCharset = AddDefaultCharset On|Off|charset
+AddModule = AddModule module [module] ...
+AllowOverride = AllowOverride All|None|directive-type [directive-type] ...
+AuthName = AuthName auth-domain
+AuthType = AuthType Basic|Digest
+BS2000Account = BS2000Account account
+BindAddress = BindAddress *|IP-address|domain-name
+ClearModuleList = ClearModuleList
+ContentDigest = ContentDigest on|off
+CoreDumpDirectory = CoreDumpDirectory directory-path
+DefaultType = DefaultType MIME-type
+DocumentRoot = DocumentRoot directory-path
+EBCDICConvert = EBCDICConvert On|Off[=direction] extension [extension] ...
+EBCDICConvertByType = EBCDICConvertByType On|Off[=direction] mimetype [mimetype] ...
+EBCDICKludge = EBCDICKludge On|Off
+ErrorDocument = ErrorDocument error-code document
+ErrorLog = ErrorLog file-path|syslog[:facility] 
+FileETag = FileETag component ...
+Group = Group unix-group
+HostnameLookups = HostnameLookups on|off|double
+IdentityCheck = IdentityCheck on|off
+Include = Include file-path|directory-path
+KeepAlive = KeepAlive on|off
+KeepAliveTimeout = KeepAliveTimeout seconds
+LimitRequestBody = LimitRequestBody bytes
+LimitRequestFields = LimitRequestFields number
+LimitRequestFieldsize = LimitRequestFieldsize bytes
+LimitRequestLine = LimitRequestLine bytes
+Listen = Listen [IP-address:]port
+ListenBacklog = ListenBacklog backlog
+LockFile = LockFile file-path
+LogLevel = LogLevel level
+MaxClients = MaxClients number
+MaxKeepAliveRequests = MaxKeepAliveRequests number
+MaxRequestsPerChild = MaxRequestsPerChild number
+MaxSpareServers = MaxSpareServers number
+MinSpareServers = MinSpareServers number
+NameVirtualHost = NameVirtualHost addr[:port]
+Options = Options [+|-]option [[+|-]option] ...
+PidFile = PidFile file-path
+Port = Port number
+RLimitCPU = RLimitCPU number|max [number|max] 
+RLimitMEM = RLimitMEM number|max [number|max]
+RLimitNPROC = RLimitNPROC number|max [number|max]
+Require = Require entity-name [entity-name] ...
+ResourceConfig = ResourceConfig file-path|directory-path
+Satisfy = Satisfy any|all
+ScoreBoardFile = ScoreBoardFile file-path
+ScriptInterpreterSource = ScriptInterpreterSource registry|script
+SendBufferSize = SendBufferSize bytes
+ServerAdmin = ServerAdmin email-address
+ServerAlias = ServerAlias hostname [hostname] ...
+ServerName = ServerName fully-qualified-domain-name 
+ServerPath = ServerPath directory-path
+ServerRoot = ServerRoot directory-path
+ServerSignature = ServerSignature On|Off|EMail
+ServerTokens = ServerTokens Minimal|ProductOnly|OS|Full
+ServerType = ServerType type
+StartServers = StartServers number
+ThreadStackSize = ThreadStackSize number
+ThreadsPerChild = ThreadsPerChild number
+TimeOut = TimeOut number
+UseCanonicalName = UseCanonicalName on|off|dns
+User = User unix-userid
+
+[mod_access]
+Allow = Allow from all|host|env=env-variable [host|env=env-variable] ...
+Deny = Deny from all|host|env=env-variable [host|env=env-variable] ...
+Order = Order ordering
+
+[mod_actions]
+Action = Action action-type cgi-script
+Script = Script method cgi-script
+
+[mod_alias]
+Alias = Alias URL-path file-path|directory-path
+AliasMatch = AliasMatch regex file-path|directory-path
+Redirect = Redirect [status] URL-path URL
+RedirectMatch = RedirectMatch [status] regex URL
+RedirectPermanent = RedirectPermanent URL-path URL
+RedirectTemp = RedirectTemp URL-path URL
+ScriptAlias = ScriptAlias URL-path file-path|directory-path
+ScriptAliasMatch = ScriptAliasMatch regex file-path|directory-path
+
+[mod_auth]
+AuthAuthoritative = AuthAuthoritative on|off
+AuthGroupFile = AuthGroupFile file-path
+AuthUserFile = AuthUserFile file-path
+
+[mod_auth_anon]
+Anonymous = Anonymous user  [user] ...
+Anonymous_Authoritative = Anonymous_Authoritative on|off
+Anonymous_LogEmail = Anonymous_LogEmail on
+Anonymous_MustGiveEmail = Anonymous_MustGiveEmail on
+Anonymous_NoUserID = Anonymous_NoUserID on|off
+Anonymous_VerifyEmail = Anonymous_VerifyEmail on|off
+
+[mod_auth_db]
+AuthDBAuthoritative = AuthDBAuthoritative on|off
+AuthDBGroupFile = AuthDBGroupFile file-path
+AuthDBUserFile = AuthDBUserFile file-path 
+
+[mod_auth_dbm]
+AuthDBMAuthoritative = AuthDBMAuthoritative on|off
+AuthDBMGroupFile = AuthDBMGroupFile file-path
+AuthDBMUserFile = AuthDBMUserFile file-path
+
+[mod_autoindex]
+AddAlt = AddAlt string file [file] ...
+AddAltByEncoding = AddAltByEncoding string MIME-encoding [MIME-encoding] ...
+AddAltByType = AddAltByType string MIME-type [MIME-type] ...
+AddDescription = AddDescription string file [file] ...
+AddIcon = AddIcon icon name [name] ...
+AddIconByEncoding = AddIconByEncoding icon MIME-encoding [MIME-encoding] ...
+AddIconByType = AddIconByType icon MIME-type [MIME-type] ...
+DefaultIcon = DefaultIcon url
+FancyIndexing = FancyIndexing on|off
+HeaderName = HeaderName filename
+IndexIgnore = IndexIgnore file [file] ...
+IndexOptions = IndexOptions [+|-]option [[+|-]option] ... (Apache 1.3.3 and later) 
+IndexOrderDefault = IndexOrderDefault Ascending|Descending Name|Date|Size|Description 
+ReadmeName = ReadmeName filename
+
+[mod_cern_meta]
+MetaDir = MetaDir directory
+MetaFiles = MetaFiles on|off
+MetaSuffix = MetaSuffix suffix
+
+[mod_cgi]
+ScriptLog = ScriptLog filename
+ScriptLogBuffer = ScriptLogBuffer bytes
+ScriptLogLength = ScriptLogLength bytes
+
+[mod_cookies]
+CookieLog = CookieLog filename
+
+[mod_digest]
+AuthDigestFile = AuthDigestFile filename
+
+[mod_dir]
+DirectoryIndex = DirectoryIndex local-url [local-url] ...
+
+[mod_env]
+PassEnv = PassEnv env-variable [env-variable] ...
+SetEnv = SetEnv env-variable value
+UnsetEnv = UnsetEnv env-variable [env-variable] ...
+
+[mod_example]
+Example = Example
+
+[mod_expires]
+ExpiresActive = ExpiresActive on|off
+ExpiresByType = ExpiresByType mime-type <code>seconds
+ExpiresDefault = ExpiresDefault <code>seconds
+
+[mod_headers]
+Header = Header unset header
+
+[mod_imap]
+ImapBase = ImapBase map|referer|URL
+ImapDefault = ImapDefault error|nocontent|map|referer|URL
+ImapMenu = ImapMenu none|formatted|semiformatted|unformatted
+
+[mod_include]
+XBitHack = XBitHack on|off|full
+
+[mod_info]
+AddModuleInfo = AddModuleInfo module-name string
+
+[mod_isapi]
+ISAPIAppendLogToErrors = ISAPIAppendLogToErrors on|off
+ISAPIAppendLogToQuery = ISAPIAppendLogToQuery on|off
+ISAPILogNotSupported = ISAPILogNotSupported on|off
+ISAPIReadAheadBuffer = ISAPIReadAheadBuffer size
+
+[mod_log_agent]
+AgentLog = AgentLog file-pipe
+
+[mod_log_config]
+CookieLog = CookieLog filename
+CustomLog = CustomLog file|pipe format|nickname [env=[!]environment-variable]
+LogFormat = LogFormat format|nickname [nickname]
+TransferLog = TransferLog file|pipe
+
+[mod_log_referer]
+RefererIgnore = RefererIgnore string [string] ...
+RefererLog = RefererLog file-pipe
+
+[mod_mime]
+AddCharset = AddCharset charset extension [extension] ...
+AddEncoding = AddEncoding MIME-enc extension [extension] ...
+AddHandler = AddHandler handler-name extension [extension] ...
+AddLanguage = AddLanguage MIME-lang extension [extension] ...
+AddType = AddType MIME-type extension [extension] ...
+DefaultLanguage = DefaultLanguage MIME-lang
+ForceType = ForceType media-type
+RemoveEncoding = RemoveEncoding extension [extension] ...
+RemoveHandler = RemoveHandler extension [extension] ...
+RemoveType = RemoveType extension [extension] ...
+SetHandler = SetHandler handler-name
+TypesConfig = TypesConfig file-path
+
+[mod_mime_magic]
+MimeMagicFile = MimeMagicFile file-path
+
+[mod_mmap_static]
+MMapFile = MMapFile filename [filename] ...
+
+[mod_negotiation]
+CacheNegotiatedDocs = CacheNegotiatedDocs
+LanguagePriority = LanguagePriority MIME-lang [MIME-lang] ...
+
+[mod_proxy]
+AllowCONNECT = AllowCONNECT port [port] ...
+CacheDefaultExpire = CacheDefaultExpire hours
+CacheDirLength = CacheDirLength length
+CacheDirLevels = CacheDirLevels levels
+CacheForceCompletion = CacheForceCompletion percentage
+CacheGcInterval = CacheGcInterval hours
+CacheLastModifiedFactor = CacheLastModifiedFactor factor
+CacheMaxExpire = CacheMaxExpire hours
+CacheRoot = CacheRoot directory
+CacheSize = CacheSize kilobytes
+NoCache = NoCache *|word|host|domain [word|host|domain] ...
+NoProxy = NoProxy NoProxy Domain|SubNet|IpAddr|Hostname [Domain|SubNet|IpAddr|Hostname] ...
+ProxyBlock = ProxyBlock *|word|host|domain [word|host|domain] ...
+ProxyDomain = ProxyDomain Domain
+ProxyIOBufferSize = ProxyIOBufferSize bytes
+ProxyPass = ProxyPass path url
+ProxyPassReverse = ProxyPassReverse path url
+ProxyReceiveBufferSize = ProxyReceiveBufferSize bytes
+ProxyRemote = ProxyRemote match remote-server
+ProxyRequests = ProxyRequests on|off
+ProxyVia = ProxyVia on|off|full|block
+
+[mod_rewrite]
+RewriteBase = RewriteBase URL-path
+RewriteCond = RewriteCond TestString CondPattern
+RewriteEngine = RewriteEngine on|off
+RewriteLock = RewriteLock file-path
+RewriteLog = RewriteLog file-path
+RewriteLogLevel = RewriteLogLevel Level
+RewriteMap = RewriteMap MapName MapType:MapSource
+RewriteOptions = RewriteOptions Option
+RewriteRule = RewriteRule Pattern Substitution
+
+[mod_setenvif]
+BrowserMatch = BrowserMatch regex env-variable[=value] [env-variable[=value]] ...
+BrowserMatchNoCase = BrowserMatchNoCase regex env-variable[=value] [env-variable[=value]] ...
+SetEnvIf = SetEnvIf attribute regex env-variable[=value] [env-variable[=value]] ...
+SetEnvIfNoCase = SetEnvIfNoCase attribute regex env-variable[=value] [env-variable[=value]] ...
+
+[mod_so]
+LoadFile = LoadFile filename [filename] ...
+LoadModule = LoadModule module filename
+
+[mod_speling]
+CheckSpelling = CheckSpelling on|off
+
+[mod_status]
+ExtendedStatus = ExtendedStatus On|Off
+
+[mod_userdir]
+UserDir = UserDir directory-filename
+
+[mod_usertrack]
+CookieDomain = CookieDomain domain
+CookieExpires = CookieExpires expiry-period
+CookieName = CookieName token 
+CookieStyle = CookieStyle Netscape|Cookie|Cookie2|RFC2109|RFC2965
+CookieTracking = CookieTracking on|off
+
+[mod_vhost_alias]
+VirtualDocumentRoot = VirtualDocumentRoot interpolated-directory
+VirtualDocumentRootIP = VirtualDocumentRootIP interpolated-directory
+VirtualScriptAlias = VirtualScriptAlias interpolated-directory
+VirtualScriptAliasIP = VirtualScriptAliasIP interpolated-directory
