@@ -10,46 +10,6 @@ export DH_COMPAT=1
 
 srcdir = $(shell pwd)
 
-patch: unpack stampdir/patch-stamp
-stampdir/patch-stamp:
-	# Apply the patches one by one, output success/error (and log progress of each patch)
-	@(if [ -d "$(srcdir)/debian/patches" ]; then \
-	    cd build-tree/mod_ldap_cfg/ && \
-	    echo "Adding patch: "; \
-	    for file in $(srcdir)/debian/patches/[0-9]*[a-zA-Z0-9]; do \
-	      log="$(srcdir)/stampdir/patch-`basename $$file`.log"; \
-	      stamp="$(srcdir)/stampdir/patch-`basename $$file`.stamp"; \
-	      echo -n "  `basename $$file`: "; \
-	      if [ ! -e $$stamp ]; then \
-	        if cat $$file | patch -p2 --no-backup-if-mismatch > $$log; then \
-	          echo successfull.; \
-	          touch $$stamp; \
-	        else \
-	          echo "Error - see stampdir/patch-`basename $$log` for details"; \
-	          exit 1; \
-	        fi; \
-	      else \
-	        echo Already applied $$file.; \
-	      fi; \
-	      find -type f -name '*.orig' | xargs --no-run-if-empty rm -f; \
-	    done; \
-	  else \
-	    echo "No patches to apply (debian/patches don't exists)"; \
-	  fi)
-
-	touch stampdir/patch-stamp
-
-unpack: stampdir/unpack-stamp
-stampdir/unpack-stamp:
-	dh_testdir
-
-	mkdir stampdir
-
-	# Extract distribution tarballs
-	@(mkdir -p build-tree && cd build-tree && \
-	  tar xzf ../mod_ldap_cfg.tar.gz)
-	touch stampdir/unpack-stamp
-
 build: build-stamp
 build-stamp: patch
 	dh_testdir
@@ -66,7 +26,7 @@ build-stamp: patch
 clean:
 	dh_testdir
 	dh_testroot
-	rm -Rf stampdir build-tree*
+	rm -Rf stampdir
 	dh_clean
 
 install: build
