@@ -73,9 +73,23 @@
 
 // Let Apache know that we are here and we mean business
 
+#ifdef SERVER_BASEREVISION
+/* Apache 1.3 */
+#define AP_VERSION 1
 module MODULE_VAR_EXPORT ldap_cfg_module;
+#else
+/* Apache 2.2 */
+#define AP_VERSION 2
+module AP_MODULE_DECLARE_DATA ldap_cfg_module;
+#include "apr_pools.h"
 
-
+/* http://siag.nu/mod_log_sdb/mod_log_sdb.c */
+typedef apr_pool_t pool;
+typedef apr_array_header_t array_header;
+typedef apr_table_t table;
+typedef apr_table_entry_t table_entry;
+typedef ap_configfile_t configfile_t;
+#endif
 
 
 ////
@@ -408,8 +422,11 @@ static void * ldap_cfg_create_srv_config(
      pool * p,
      server_rec * s)  
 { 
-     ldap_cfg_srv_cfg * scfg =
-          (ldap_cfg_srv_cfg *) ap_pcalloc( p, sizeof( *scfg ) );
+#if AP_VERSION == 1
+     ldap_cfg_srv_cfg * scfg = (ldap_cfg_srv_cfg *) ap_pcalloc( p, sizeof( *scfg ) );
+#else
+     ldap_cfg_srv_cfg * scfg = (ldap_cfg_srv_cfg *) apr_pcalloc( p, sizeof( *scfg ) );
+#endif
 
      /* Prep scfg entry */
      LDEBUG( LDAP_CFG_DEBUG_TODO, "Creating new Server Config object\n" );
@@ -425,13 +442,19 @@ static void * ldap_cfg_create_srv_config(
      {
           LDEBUG( LDAP_CFG_DEBUG_TODO,
                   "Creating attribute-stack memory pool\n" );
+#if AP_VERSION == 1
           ldap_cfg_attr_stack_pool = ap_make_sub_pool( p );
+#else
+	  apr_pool_create_ex(&ldap_cfg_attr_stack_pool, p, NULL, NULL);
+#endif
 
           LDEBUG( LDAP_CFG_DEBUG_TODO, "Creating attribute-stack\n" );
-          ldap_cfg_attr_stack_ah =
-               ap_make_array( ldap_cfg_attr_stack_pool,
-                              4,
-                              sizeof( array_header * ) );
+#if AP_VERSION == 1
+          ldap_cfg_attr_stack_ah = ap_make_array( ldap_cfg_attr_stack_pool,
+#else
+          ldap_cfg_attr_stack_ah = apr_array_make( ldap_cfg_attr_stack_pool,
+#endif
+						   4, sizeof( array_header * ) );
      }
 
      return (void *) scfg;
@@ -443,7 +466,11 @@ static void * ldap_cfg_merge_srv_config(
      void *new )
 { 
      //ldap_cfg_srv_cfg * scfg =
+#if AP_VERSION == 1
      //     (ldap_cfg_srv_cfg *) ap_pcalloc( p, sizeof( *scfg ) );
+#else
+     //     (ldap_cfg_srv_cfg *) apr_pcalloc( p, sizeof( *scfg ) );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_TODO, "Merging Server Config objects\n" );
      LDEBUG( LDAP_CFG_DEBUG_FUNC, "ldap_cfg_merge_srv_config()\n" );
@@ -477,7 +504,11 @@ static const char *ldap_cfg_binddn_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->bind_dn = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->bind_dn = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_binddn_cmd( bind_dn => \"%s\" )\n",
@@ -492,7 +523,11 @@ static const char *ldap_cfg_password_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->password = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->password = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_password_cmd( password => \"%s\" )\n",
@@ -508,7 +543,11 @@ static const char *ldap_cfg_host_cmd (
      const char * port )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->host = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->host = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      // Port is optional
      if( port != NULL )
@@ -531,7 +570,11 @@ static const char * ldap_cfg_uri_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->uri = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->uri = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_uri_cmd( URI => \"%s\" )\n",
@@ -562,7 +605,11 @@ static const char * ldap_cfg_sasl_authc_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->sasl_authc = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->sasl_authc = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( ( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC ),
              "ldap_cfg_sasl_authc_cmd( AuthenticationID => \"%s\" )\n",
@@ -577,7 +624,11 @@ static const char * ldap_cfg_sasl_authz_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->sasl_authz = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->sasl_authz = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_sasl_authz_cmd( AuthorizationID => \"%s\" )\n",
@@ -592,7 +643,11 @@ static const char * ldap_cfg_sasl_realm_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->sasl_realm = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->sasl_realm = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_sasl_realm_cmd( realm => \"%s\" )\n",
@@ -607,7 +662,11 @@ static const char * ldap_cfg_sasl_mech_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->sasl_mech = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->sasl_mech = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_sasl_mech_cmd( mechanism => \"%s\" )\n",
@@ -621,7 +680,11 @@ static const char * ldap_cfg_sasl_props_cmd (
      const char *arg )
 {
      ldap_cfg_srv_cfg * cfg = ldap_cfg_get_srv_cfg( cmd );
+#if AP_VERSION == 1
      cfg->sasl_props = ap_pstrdup( cmd->temp_pool, arg );
+#else
+     cfg->sasl_props = apr_pstrdup( cmd->temp_pool, arg );
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_sasl_props_cmd( props => \"%s\" )\n",
@@ -738,7 +801,11 @@ static const char * ldap_cfg_base_dn_cmd (
      }
      else
      {
+#if AP_VERSION == 1
           cfg->base_dn = ap_pstrdup( cmd->temp_pool, arg );
+#else
+          cfg->base_dn = apr_pstrdup( cmd->temp_pool, arg );
+#endif
      }
 
      return NULL;
@@ -835,7 +902,11 @@ const char * ldap_cfg_search_session(
      args.call_back_data = NULL;
 
      // Make a sub-pool for all Session-specific memory operations
+#if AP_VERSION == 1
      args.mem_pool = ap_make_sub_pool( args.parms->temp_pool );
+#else
+     apr_pool_create_ex(&args.mem_pool, args.parms->temp_pool, NULL, NULL );
+#endif
      
      // Connect to LDAP server
      args.ldap_rec = ldap_cfg_connect( cfg );
@@ -901,7 +972,11 @@ const char * ldap_cfg_search_session(
      ldap_unbind( args.ldap_rec );
 
      // Destory temporary memory pool
+#if AP_VERSION == 1
      ap_destroy_pool( args.mem_pool );
+#else
+     apr_pool_destroy( args.mem_pool );
+#endif
 
      if( error ) 
      {
@@ -1441,14 +1516,22 @@ int ldap_cfg_parse_string_for_vars(
              to_parse );
 
      // Prepare word_array
+#if AP_VERSION == 1
      parts->tokens_ah =  ap_make_array( p, 1, sizeof( char * ) );
+#else
+     parts->tokens_ah =  apr_array_make( p, 1, sizeof( char * ) );
+#endif
      parts->positions = NULL;
 
      // Allocate array of ints for holding positions only if we have
      // anything in attr_stack to substitute in
      if( ah->nelts > 0 )
      {
+#if AP_VERSION == 1
           parts->positions = ap_pcalloc( p, sizeof( int ) * ah->nelts );
+#else
+          parts->positions = apr_pcalloc( p, sizeof( int ) * ah->nelts );
+#endif
      }
 
      // Only parse if we have a string
@@ -1529,7 +1612,11 @@ int ldap_cfg_parse_string_for_vars(
                                  "Found hostname token: position => %d\n",
                                  parts->tokens_ah->nelts );
 
+#if AP_VERSION == 1
                          word_ptr = ap_push_array( parts->tokens_ah );
+#else
+                         word_ptr = apr_array_push( parts->tokens_ah );
+#endif
                          *(word_ptr) = getenv( "HOSTNAME" );
 
                          LDEBUG( LDAP_CFG_DEBUG_TODO, "Hostname: %s\n", *(word_ptr) );
@@ -1545,7 +1632,11 @@ int ldap_cfg_parse_string_for_vars(
                          
                          // Push an empty (char *) onto token array for
                          // later substitution by variable value
+#if AP_VERSION == 1
                          ap_push_array( parts->tokens_ah );
+#else
+                         apr_array_push( parts->tokens_ah );
+#endif
 
                     }
 
@@ -1595,8 +1686,13 @@ void ldap_cfg_extract_word_token(
      int length )
 {
      char ** word_ptr;
+#if AP_VERSION == 1
      word_ptr = ap_push_array( ah );
      *(word_ptr) = ap_pstrndup( p, source, length );
+#else
+     word_ptr = apr_array_push( ah );
+     *(word_ptr) = apr_pstrndup( p, source, length );
+#endif
      
      LDEBUG( LDAP_CFG_DEBUG_TODO,
              "Found word token: token => \"%s\", position => %d\n",
@@ -1627,8 +1723,13 @@ void ldap_cfg_attr_stack_add_values(
      for( index = 0; values[ index ] != NULL; index++ )
      {
           char ** word_ptr;
+#if AP_VERSION == 1
           word_ptr = ap_push_array( ah );
           *( word_ptr ) = ap_pstrdup( p, values[ index ] );
+#else
+          word_ptr = apr_array_push( ah );
+          *( word_ptr ) = apr_pstrdup( p, values[ index ] );
+#endif
           LDEBUG( LDAP_CFG_DEBUG_SRCH,
                   "\t\tAdding new value onto attr stack: %s\n",
                   *( word_ptr ) );
@@ -1651,8 +1752,11 @@ void ldap_cfg_attr_stack_add_attr (
      if( value_stack != NULL )
      {
           // Pushing on new values from search
-          array_header ** ah_ptr =
-               ap_push_array( attr_stack );
+#if AP_VERSION == 1
+          array_header ** ah_ptr = ap_push_array( attr_stack );
+#else
+          array_header ** ah_ptr = apr_array_push( attr_stack );
+#endif
           
           *( ah_ptr ) = value_stack;
      }
@@ -1941,7 +2045,11 @@ int ldap_cfg_sort_entries(
      LDEBUG( LDAP_CFG_DEBUG_TODO,
              "Allocating ldap_cfg_dn_entry array for %d entries...\n",
              count );
+#if AP_VERSION == 1
      entries = ap_pcalloc( p, sizeof( ldap_cfg_dn_entry ) * count );
+#else
+     entries = apr_pcalloc( p, sizeof( ldap_cfg_dn_entry ) * count );
+#endif
 
      single_entry = ldap_first_entry( ld, msg );
 
@@ -2074,7 +2182,11 @@ int ldap_cfg_cb_search (
      // if it doesn't exist already.  Otherwise, leave it be.
      if( args->call_back_data == NULL )
      {
+#if AP_VERSION == 1
           ah = ap_make_array( ldap_cfg_attr_stack_pool, 2, sizeof( char * ) );
+#else
+          ah = apr_array_make( ldap_cfg_attr_stack_pool, 2, sizeof( char * ) );
+#endif
           args->call_back_data = ah;
      }
      else
@@ -2173,10 +2285,18 @@ int ldap_cfg_cb_load (
      if( args->call_back_data == NULL )
      {
           LDEBUG( LDAP_CFG_DEBUG_TODO, "Preparing config stack\n" );
+#if AP_VERSION == 1
           args->call_back_data = ap_pcalloc( args->mem_pool,
+#else
+          args->call_back_data = apr_pcalloc( args->mem_pool,
+#endif
                                              sizeof( ldap_cfg_config_stack ) );
           config_stack = args->call_back_data;
+#if AP_VERSION == 1
           config_stack->config_ah = ap_make_array( args->mem_pool,
+#else
+          config_stack->config_ah = apr_array_make( args->mem_pool,
+#endif
                                                    4,
                                                    sizeof( char * ) );
           config_stack->index = 0;
@@ -2332,7 +2452,11 @@ int ldap_cfg_hanlde_section_obj (
           return LDAP_CFG_ERROR;
      }
 
+#if AP_VERSION == 1
      section_name = ap_pstrdup( args->mem_pool, values[0] );
+#else
+     section_name = apr_pstrdup( args->mem_pool, values[0] );
+#endif
      entry->section_name = section_name;
 
      ldap_value_free( values );
@@ -2484,8 +2608,13 @@ int ldap_cfg_handle_command (
      LDEBUG( LDAP_CFG_DEBUG_CFG | LDAP_CFG_DEBUG_LINE,
              "%s\n", config_string );
 
+#if AP_VERSION == 1
      word_ptr = (char **) ap_push_array( config_stack->config_ah );
      (*word_ptr) = ap_pstrdup( args->mem_pool, config_string );
+#else
+     word_ptr = (char **) apr_array_push( config_stack->config_ah );
+     (*word_ptr) = apr_pstrdup( args->mem_pool, config_string );
+#endif
 
      return LDAP_CFG_OK;
 }
@@ -2511,6 +2640,9 @@ int ldap_cfg_apache_command_loop (
      const char * err_msg;
      configfile_t fake_file;
      configfile_t * old_config;
+#if AP_VERSION == 2
+     ap_directive_t *conftree;
+#endif
 
      LDEBUG( LDAP_CFG_DEBUG_FUNC, "ldap_cfg_apache_command_loop()\n" );
 
@@ -2525,8 +2657,13 @@ int ldap_cfg_apache_command_loop (
      old_config = args->parms->config_file;
      args->parms->config_file = & fake_file;
 
-     err_msg = ap_srm_command_loop( args->parms,
-                                    args->parms->server->lookup_defaults );
+#if AP_VERSION == 1
+     err_msg = ap_srm_command_loop( args->parms, args->parms->server->lookup_defaults );
+#else
+     err_msg = ap_build_config( args->parms, args->mem_pool, args->parms->temp_pool, &conftree );
+     if( err_msg == NULL )
+       err_msg = ap_walk_config(conftree, args->parms, args->parms->server->lookup_defaults);
+#endif
 
      args->parms->config_file = old_config;
 
@@ -2871,7 +3008,9 @@ void ldap_cfg_print_offset( int depth, int debug_level )
   between each element.  I don't want ANY text, so I wrote my own
   version.  It just concatentates everything together.
 */
-char * ldap_cfg_array_pstrcat( pool * p, array_header * ah )
+char * ldap_cfg_array_pstrcat(
+     pool * p,
+     array_header * ah )
 {
      char * final, ** elts;
      int index = 0;
@@ -2881,7 +3020,12 @@ char * ldap_cfg_array_pstrcat( pool * p, array_header * ah )
 
      if( ah->nelts <= 0 || ah->elts == NULL )
      {
+#if AP_VERSION == 1
           //return (char *) ap_pcalloc(p, 1);
+#else
+          //return (char *) apr_pcalloc(p, 1);
+      
+#endif
           return NULL;
      }
 
@@ -2897,7 +3041,11 @@ char * ldap_cfg_array_pstrcat( pool * p, array_header * ah )
           }
      }
 
+#if AP_VERSION == 1
      final = ap_pcalloc( p, sizeof( char ) * ( length + 1 ) );
+#else
+     final = apr_pcalloc( p, sizeof( char ) * ( length + 1 ) );
+#endif
      length = 0;
 
      for( index = 0; index < ah->nelts; index++ )
@@ -3072,8 +3220,10 @@ static const command_rec ldap_cfg_cmds[] =
      { NULL }
 };
 
+#if AP_VERSION == 1
 module MODULE_VAR_EXPORT ldap_cfg_module = {
     STANDARD_MODULE_STUFF, 
+
     NULL,                         /* module initializer                  */
     NULL,                         /* create per-dir    config structures */
     NULL,                         /* merge  per-dir    config structures */
@@ -3093,3 +3243,15 @@ module MODULE_VAR_EXPORT ldap_cfg_module = {
     NULL,                         /* child_exit                          */
     NULL                          /* [#0] post read-request              */
 };
+#else
+module AP_MODULE_DECLARE_DATA ldap_cfg_module = {
+    STANDARD20_MODULE_STUFF,        /* maj/min,-1,file,0,0,cookie,null. */
+
+    NULL,                         /* per-directory config creator */
+    NULL,                         /* dir config merger */
+    ldap_cfg_create_srv_config,   /* server config creator */
+    ldap_cfg_merge_srv_config,    /* server config merger */
+    ldap_cfg_cmds,                /* command table */
+    NULL                          /* register-hooks function */
+};
+#endif
