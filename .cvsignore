@@ -1,0 +1,13 @@
+build-stamp
+build-tree/mod_ldap_cfg.so-apache1
+build-tree/mod_ldap_cfg.so-apache2
+build-tree/mod_ldap_cfg/.libs
+build-tree/mod_ldap_cfg/mod_ldap_cfg.la
+build-tree/mod_ldap_cfg/mod_ldap_cfg.lo
+build-tree/mod_ldap_cfg/mod_ldap_cfg.slo
+debian/files
+debian/libapache2-mod-ldapcfg
+debian/libapache2-mod-ldapcfg.conffiles
+debian/libapache2-mod-ldapcfg.substvars
+debian/substvars
+debian/tmp
