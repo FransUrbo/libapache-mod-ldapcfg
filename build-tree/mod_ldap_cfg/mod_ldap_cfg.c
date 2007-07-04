@@ -481,7 +481,7 @@ static const char *ldap_cfg_binddn_cmd (
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_binddn_cmd( bind_dn => \"%s\" )\n",
-             arg );
+             cfg->bind_dn );
 
      return NULL;
 }
@@ -496,7 +496,7 @@ static const char *ldap_cfg_password_cmd (
 
      LDEBUG( LDAP_CFG_DEBUG_CMD | LDAP_CFG_DEBUG_FUNC,
              "ldap_cfg_password_cmd( password => \"%s\" )\n",
-             arg );
+             cfg->password );
 
      return NULL;
 }
