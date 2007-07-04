@@ -16,7 +16,7 @@
 // LDAP #includes
 
 #include <ldap.h>
-#include <sasl.h>
+#include <sasl/sasl.h>
 
 // Apache #includes
 
