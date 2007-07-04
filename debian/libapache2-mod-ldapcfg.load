@@ -1,1 +1,1 @@
-LoadModule ldap_cfg_module    /usr/lib/apache/1.3/mod_ldap_cfg.so
+LoadModule ldap_cfg_module	/usr/lib/apache2/modules/mod_ldap_cfg.so
