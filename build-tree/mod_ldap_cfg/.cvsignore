@@ -1,0 +1,4 @@
+build-tree/mod_ldap_cfg/.libs
+build-tree/mod_ldap_cfg/mod_ldap_cfg.la
+build-tree/mod_ldap_cfg/mod_ldap_cfg.lo
+build-tree/mod_ldap_cfg/mod_ldap_cfg.slo

@@ -1,0 +1,6 @@
+debian/files
+debian/libapache2-mod-ldapcfg
+debian/libapache2-mod-ldapcfg.conffiles
+debian/libapache2-mod-ldapcfg.substvars
+debian/substvars
+debian/tmp
