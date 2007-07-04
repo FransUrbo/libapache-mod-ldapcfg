@@ -21,12 +21,13 @@ build-stamp: patch
 	  $(MAKE) APXS=/usr/bin/apxs2 && \
 	  mv .libs/mod_ldap_cfg.so ../mod_ldap_cfg.so-apache2 )
 
-	touch stampdir/build-stamp
+	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
-	rm -Rf stampdir
+	rm -Rf build-stamp build-tree/mod_ldap_cfg.so-apache*
+	( cd build-tree/mod_ldap_cfg && $(MAKE) clean )
 	dh_clean
 
 install: build
@@ -71,5 +72,5 @@ binary-arch: build install
 	dh_md5sums
 	dh_builddeb
 
-binary: binary-indep binary-arch unpack patch
+binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install patch
