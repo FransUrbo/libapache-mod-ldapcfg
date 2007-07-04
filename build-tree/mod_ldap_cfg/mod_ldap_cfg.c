@@ -983,14 +983,14 @@ static LDAP * ldap_cfg_connect_init(
                   "ldap_initialize( uri => \"%s\" )\n",
                   cfg->uri );
 
-          rc = ldap_initialize( ldap_rec_ptr, cfg->uri );
+          rc = ldap_initialize( &ldap_rec_ptr, cfg->uri );
           if( rc != LDAP_SUCCESS )
           {
                ERROR( "Could not create LDAP session handle (%d): %s\n",
                       rc, ldap_err2string(rc) );
                return NULL;
           }
-          return *ldap_rec_ptr;
+          return ldap_rec_ptr;
      }
      else
      {
