@@ -1,7 +1,14 @@
-all: mod_ldap_cfg.so
+APXS := $(shell if ! which apxs; then which apxs2; fi)
 
-mod_ldap_cfg.so: mod_ldap_cfg.c
-	apxs -c -Wc,-g -i -l ldap mod_ldap_cfg.c
+all: mod_ldap_cfg.o
+
+mod_ldap_cfg.o: mod_ldap_cfg.c
+	$(APXS) -c -Wc,-g -l ldap mod_ldap_cfg.c
 
 clean:
-	rm -rf *.o *.so
+	rm -rf *.o *.so *.lo *.la *.slo *~
+
+install:
+	$(APXS) -i mod_ldap_cfg.la
+
+.PHONY: all clean install
