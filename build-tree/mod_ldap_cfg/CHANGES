@@ -1,0 +1,7 @@
+Apache LDAP vhost driver
+
+mod_ldap_cfg 1.1 TO BE ANNOUNCED
+	Additions/Misc changes
+	  * Ignore some files left after a build.
+	  * Lot's of Apache 2.x API changes...
+	  * Rewrite with better and more modern config file.
