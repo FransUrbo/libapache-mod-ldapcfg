@@ -1,3 +1,10 @@
+libapache-mod-ldapcfg (1.0-7) unstable; urgency=low
+
+  * Builddepend on libldap2.4-dev
+  * Depend on libldap2.4
+
+ -- Turbo Fredriksson <turbo@bayour.com>  Thu, 19 Jul 2007 14:34:43 +0000
+
 libapache-mod-ldapcfg (1.0-6) unstable; urgency=low
 
   * Downgrade build-dependency on apache2-threaded-dev from
