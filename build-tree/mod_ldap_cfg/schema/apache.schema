@@ -6,6 +6,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.1 NAME 'ApacheRawArg'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.1 NAME 'ApacheConfigObj'
 	DESC 'Contains configuration directives for Config'
+	AUXILIARY
 	MAY ApacheRawArg )
 
 ####################
@@ -24,8 +25,8 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.3 NAME 'ApacheSectionArg'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.2 NAME 'ApacheSectionObj'
 	DESC 'Contains configuration directives for Section'
-	SUP 'ApacheConfigObj'
-	MAY ( ApacheSectionName $ ApacheSectionArg ) )
+	SUP ApacheConfigObj AUXILIARY
+	MUST ( ApacheSectionName $ ApacheSectionArg ) )
 
 ####################
 
@@ -422,7 +423,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.71 NAME 'ApacheUser'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.3 NAME 'ApacheModCoreObj'
 	DESC 'Contains configuration directives for mod_core'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAcceptFilter $ ApacheAcceptMutex $ ApacheAccessConfig $
 		 ApacheAccessFileName $ ApacheAddDefaultCharset $ ApacheAddModule $
 		 ApacheAllowOverride $ ApacheAuthName $ ApacheAuthType $
@@ -451,7 +452,7 @@ objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.3 NAME 'ApacheModCoreObj'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.4 NAME 'ApacheHTAccessObj'
 	DESC 'Contains configuration directives for htaccess'
-	SUP 'ApacheModCoreObj'
+	SUP ApacheModCoreObj AUXILIARY
 	MAY ( ApacheAddDefaultCharset $ ApacheAuthName $ ApacheAuthType $
 		 ApacheContentDigest $ ApacheDefaultType $ ApacheEBCDICConvert $
 		 ApacheEBCDICConvertByType $ ApacheEBCDICKludge $ ApacheErrorDocument $
@@ -463,7 +464,7 @@ objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.4 NAME 'ApacheHTAccessObj'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.5 NAME 'ApacheDirectoryObj'
 	DESC 'Contains configuration directives for directory'
-	SUP 'ApacheModCoreObj'
+	SUP ApacheModCoreObj AUXILIARY
 	MAY ( ApacheAddDefaultCharset $ ApacheAllowOverride $ ApacheAuthName $
 		 ApacheAuthType $ ApacheContentDigest $ ApacheDefaultType $
 		 ApacheEBCDICConvert $ ApacheEBCDICConvertByType $ ApacheEBCDICKludge $
@@ -476,7 +477,7 @@ objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.5 NAME 'ApacheDirectoryObj'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.6 NAME 'ApacheServerConfigObj'
 	DESC 'Contains configuration directives for serverconfig'
-	SUP 'ApacheModCoreObj'
+	SUP ApacheModCoreObj AUXILIARY
 	MAY ( ApacheAcceptFilter $ ApacheAcceptMutex $ ApacheAccessConfig $
 		 ApacheAccessFileName $ ApacheAddDefaultCharset $ ApacheAddModule $
 		 ApacheBS2000Account $ ApacheBindAddress $ ApacheClearModuleList $
@@ -502,7 +503,8 @@ objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.6 NAME 'ApacheServerConfigObj'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.7 NAME 'ApacheVirtualHostObj'
 	DESC 'Contains configuration directives for VirtualHost'
-	SUP 'ApacheModCoreObj'
+	SUP ApacheModCoreObj AUXILIARY
+	MUST ( ApacheServerName )
 	MAY ( ApacheAccessConfig $ ApacheAccessFileName $ ApacheAddDefaultCharset $
 		 ApacheContentDigest $ ApacheDefaultType $ ApacheDocumentRoot $
 		 ApacheEBCDICConvert $ ApacheEBCDICConvertByType $ ApacheEBCDICKludge $
@@ -511,7 +513,7 @@ objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.7 NAME 'ApacheVirtualHostObj'
 		 ApacheLimitRequestBody $ ApacheLogLevel $ ApacheOptions $
 		 ApacheRLimitCPU $ ApacheRLimitMEM $ ApacheRLimitNPROC $
 		 ApacheResourceConfig $ ApacheServerAdmin $ ApacheServerAlias $
-		 ApacheServerName $ ApacheServerPath $ ApacheServerSignature $
+		 ApacheServerPath $ ApacheServerSignature $
 		 ApacheUseCanonicalName $ ApacheUser ) )
 
 ####################
@@ -536,7 +538,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.74 NAME 'ApacheOrder'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.8 NAME 'ApacheModAccessObj'
 	DESC 'Contains configuration directives for mod_access'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAllow $ ApacheDeny $ ApacheOrder ) )
 
 ####################
@@ -555,7 +557,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.76 NAME 'ApacheScript'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.9 NAME 'ApacheModActionsObj'
 	DESC 'Contains configuration directives for mod_actions'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAction $ ApacheScript ) )
 
 ####################
@@ -610,7 +612,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.84 NAME 'ApacheScriptAliasMatch'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.10 NAME 'ApacheModAliasObj'
 	DESC 'Contains configuration directives for mod_alias'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAlias $ ApacheAliasMatch $ ApacheRedirect $
 		 ApacheRedirectMatch $ ApacheRedirectPermanent $ ApacheRedirectTemp $
 		 ApacheScriptAlias $ ApacheScriptAliasMatch ) )
@@ -637,7 +639,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.87 NAME 'ApacheAuthUserFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.11 NAME 'ApacheModAuthObj'
 	DESC 'Contains configuration directives for mod_auth'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAuthAuthoritative $ ApacheAuthGroupFile $ ApacheAuthUserFile ) )
 
 ####################
@@ -680,7 +682,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.93 NAME 'ApacheAnonymous--VerifyEmail'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.12 NAME 'ApacheModAuthAnonObj'
 	DESC 'Contains configuration directives for mod_auth_anon'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAnonymous $ ApacheAnonymous--Authoritative $ ApacheAnonymous--LogEmail $
 		 ApacheAnonymous--MustGiveEmail $ ApacheAnonymous--NoUserID $ ApacheAnonymous--VerifyEmail ) )
 
@@ -706,7 +708,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.96 NAME 'ApacheAuthDBUserFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.13 NAME 'ApacheModAuthDbObj'
 	DESC 'Contains configuration directives for mod_auth_db'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAuthDBAuthoritative $ ApacheAuthDBGroupFile $ ApacheAuthDBUserFile ) )
 
 ####################
@@ -731,7 +733,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.99 NAME 'ApacheAuthDBMUserFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.14 NAME 'ApacheModAuthDbmObj'
 	DESC 'Contains configuration directives for mod_auth_dbm'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAuthDBMAuthoritative $ ApacheAuthDBMGroupFile $ ApacheAuthDBMUserFile ) )
 
 ####################
@@ -822,7 +824,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.113 NAME 'ApacheReadmeName'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.15 NAME 'ApacheModAutoindexObj'
 	DESC 'Contains configuration directives for mod_autoindex'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAddAlt $ ApacheAddAltByEncoding $ ApacheAddAltByType $
 		 ApacheAddDescription $ ApacheAddIcon $ ApacheAddIconByEncoding $
 		 ApacheAddIconByType $ ApacheDefaultIcon $ ApacheFancyIndexing $
@@ -851,7 +853,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.116 NAME 'ApacheMetaSuffix'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.16 NAME 'ApacheModCernMetaObj'
 	DESC 'Contains configuration directives for mod_cern_meta'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheMetaDir $ ApacheMetaFiles $ ApacheMetaSuffix ) )
 
 ####################
@@ -874,7 +876,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.119 NAME 'ApacheScriptLogLength'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.17 NAME 'ApacheModCgiObj'
 	DESC 'Contains configuration directives for mod_cgi'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheScriptLog $ ApacheScriptLogBuffer $ ApacheScriptLogLength ) )
 
 ####################
@@ -887,7 +889,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.120 NAME 'ApacheCookieLog'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.18 NAME 'ApacheModCookiesObj'
 	DESC 'Contains configuration directives for mod_cookies'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheCookieLog )
 
 ####################
@@ -900,7 +902,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.121 NAME 'ApacheAuthDigestFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.19 NAME 'ApacheModDigestObj'
 	DESC 'Contains configuration directives for mod_digest'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheAuthDigestFile )
 
 ####################
@@ -913,7 +915,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.122 NAME 'ApacheDirectoryIndex'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.20 NAME 'ApacheModDirObj'
 	DESC 'Contains configuration directives for mod_dir'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheDirectoryIndex )
 
 ####################
@@ -938,7 +940,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.125 NAME 'ApacheUnsetEnv'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.21 NAME 'ApacheModEnvObj'
 	DESC 'Contains configuration directives for mod_env'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApachePassEnv $ ApacheSetEnv $ ApacheUnsetEnv ) )
 
 ####################
@@ -951,7 +953,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.126 NAME 'ApacheExample'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.22 NAME 'ApacheModExampleObj'
 	DESC 'Contains configuration directives for mod_example'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheExample )
 
 ####################
@@ -976,7 +978,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.129 NAME 'ApacheExpiresDefault'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.23 NAME 'ApacheModExpiresObj'
 	DESC 'Contains configuration directives for mod_expires'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheExpiresActive $ ApacheExpiresByType $ ApacheExpiresDefault ) )
 
 ####################
@@ -989,7 +991,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.130 NAME 'ApacheHeader'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.24 NAME 'ApacheModHeadersObj'
 	DESC 'Contains configuration directives for mod_headers'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheHeader )
 
 ####################
@@ -1014,7 +1016,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.133 NAME 'ApacheImapMenu'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.25 NAME 'ApacheModImapObj'
 	DESC 'Contains configuration directives for mod_imap'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheImapBase $ ApacheImapDefault $ ApacheImapMenu ) )
 
 ####################
@@ -1027,7 +1029,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.134 NAME 'ApacheXBitHack'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.26 NAME 'ApacheModIncludeObj'
 	DESC 'Contains configuration directives for mod_include'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheXBitHack )
 
 ####################
@@ -1040,7 +1042,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.135 NAME 'ApacheAddModuleInfo'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.27 NAME 'ApacheModInfoObj'
 	DESC 'Contains configuration directives for mod_info'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheAddModuleInfo )
 
 ####################
@@ -1070,7 +1072,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.139 NAME 'ApacheISAPIReadAheadBuffer'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.28 NAME 'ApacheModIsapiObj'
 	DESC 'Contains configuration directives for mod_isapi'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheISAPIAppendLogToErrors $ ApacheISAPIAppendLogToQuery $ ApacheISAPILogNotSupported $
 		 ApacheISAPIReadAheadBuffer ) )
 
@@ -1084,7 +1086,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.140 NAME 'ApacheAgentLog'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.29 NAME 'ApacheModLogAgentObj'
 	DESC 'Contains configuration directives for mod_log_agent'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheAgentLog )
 
 ####################
@@ -1109,7 +1111,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.143 NAME 'ApacheTransferLog'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.30 NAME 'ApacheModLogConfigObj'
 	DESC 'Contains configuration directives for mod_log_config'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheCookieLog $ ApacheCustomLog $ ApacheLogFormat $
 		 ApacheTransferLog ) )
 
@@ -1129,7 +1131,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.145 NAME 'ApacheRefererLog'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.31 NAME 'ApacheModLogRefererObj'
 	DESC 'Contains configuration directives for mod_log_referer'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheRefererIgnore $ ApacheRefererLog ) )
 
 ####################
@@ -1208,7 +1210,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.157 NAME 'ApacheTypesConfig'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.32 NAME 'ApacheModMimeObj'
 	DESC 'Contains configuration directives for mod_mime'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAddCharset $ ApacheAddEncoding $ ApacheAddHandler $
 		 ApacheAddLanguage $ ApacheAddType $ ApacheDefaultLanguage $
 		 ApacheForceType $ ApacheRemoveEncoding $ ApacheRemoveHandler $
@@ -1224,7 +1226,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.158 NAME 'ApacheMimeMagicFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.33 NAME 'ApacheModMimeMagicObj'
 	DESC 'Contains configuration directives for mod_mime_magic'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheMimeMagicFile )
 
 ####################
@@ -1237,7 +1239,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.159 NAME 'ApacheMMapFile'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.34 NAME 'ApacheModMmapStaticObj'
 	DESC 'Contains configuration directives for mod_mmap_static'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheMMapFile )
 
 ####################
@@ -1256,7 +1258,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.161 NAME 'ApacheLanguagePriority'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.35 NAME 'ApacheModNegotiationObj'
 	DESC 'Contains configuration directives for mod_negotiation'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheCacheNegotiatedDocs $ ApacheLanguagePriority ) )
 
 ####################
@@ -1380,7 +1382,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.182 NAME 'ApacheProxyVia'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.36 NAME 'ApacheModProxyObj'
 	DESC 'Contains configuration directives for mod_proxy'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheAllowCONNECT $ ApacheCacheDefaultExpire $ ApacheCacheDirLength $
 		 ApacheCacheDirLevels $ ApacheCacheForceCompletion $ ApacheCacheGcInterval $
 		 ApacheCacheLastModifiedFactor $ ApacheCacheMaxExpire $ ApacheCacheRoot $
@@ -1446,7 +1448,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.191 NAME 'ApacheRewriteRule'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.37 NAME 'ApacheModRewriteObj'
 	DESC 'Contains configuration directives for mod_rewrite'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheRewriteBase $ ApacheRewriteCond $ ApacheRewriteEngine $
 		 ApacheRewriteLock $ ApacheRewriteLog $ ApacheRewriteLogLevel $
 		 ApacheRewriteMap $ ApacheRewriteOptions $ ApacheRewriteRule ) )
@@ -1479,7 +1481,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.195 NAME 'ApacheSetEnvIfNoCase'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.38 NAME 'ApacheModSetenvifObj'
 	DESC 'Contains configuration directives for mod_setenvif'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheBrowserMatch $ ApacheBrowserMatchNoCase $ ApacheSetEnvIf $
 		 ApacheSetEnvIfNoCase ) )
 
@@ -1499,7 +1501,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.197 NAME 'ApacheLoadModule'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.39 NAME 'ApacheModSoObj'
 	DESC 'Contains configuration directives for mod_so'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheLoadFile $ ApacheLoadModule ) )
 
 ####################
@@ -1512,7 +1514,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.198 NAME 'ApacheCheckSpelling'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.40 NAME 'ApacheModSpelingObj'
 	DESC 'Contains configuration directives for mod_speling'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheCheckSpelling )
 
 ####################
@@ -1525,7 +1527,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.199 NAME 'ApacheExtendedStatus'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.41 NAME 'ApacheModStatusObj'
 	DESC 'Contains configuration directives for mod_status'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheExtendedStatus )
 
 ####################
@@ -1538,7 +1540,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.200 NAME 'ApacheUserDir'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.42 NAME 'ApacheModUserdirObj'
 	DESC 'Contains configuration directives for mod_userdir'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ApacheUserDir )
 
 ####################
@@ -1575,7 +1577,7 @@ attributetype ( 1.3.6.1.4.1.13607.1.1.1.2.205 NAME 'ApacheCookieTracking'
 
 objectclass ( 1.3.6.1.4.1.13607.1.1.1.1.43 NAME 'ApacheModUsertrackObj'
 	DESC 'Contains configuration directives for mod_usertrack'
-	SUP 'ApacheConfigObj'
+	SUP ApacheConfigObj AUXILIARY
 	MAY ( ApacheCookieDomain $ ApacheCookieExpires $ ApacheCookieName $
 		 ApacheCookieStyle $ ApacheCookieTracking ) )
 
