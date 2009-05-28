@@ -2641,7 +2641,7 @@ int ldap_cfg_apache_command_loop (
      configfile_t fake_file;
      configfile_t * old_config;
 #if AP_VERSION == 2
-     ap_directive_t *conftree;
+     ap_directive_t *conftree = NULL;
 #endif
 
      LDEBUG( LDAP_CFG_DEBUG_FUNC, "ldap_cfg_apache_command_loop()\n" );
