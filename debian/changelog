@@ -1,3 +1,9 @@
+libapache-mod-ldapcfg (1.0-8) unstable; urgency=low
+
+  * Completley remove Apache 1.3 building.
+
+ -- Turbo Fredriksson <turbo@bayour.com>  Thu, 28 May 2009 09:18:17 +0000
+
 libapache-mod-ldapcfg (1.0-7) unstable; urgency=low
 
   * Builddepend on libldap2.4-dev
