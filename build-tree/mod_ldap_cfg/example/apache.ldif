@@ -1,0 +1,17 @@
+dn: cn=apache.domain.tld:80,cn=apache.domain.tld,ou=Computers,c=SE
+objectClass: device
+cn: apache.domain.tld:80
+
+dn: ApacheServerName=apache.domain.tld,cn=apache.domain.tld:80,cn=apache.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: apache.domain.tld
+ApacheServerName: apache.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: turbo@bayour.com
+ApacheDocumentRoot: /var/www/
+ApacheSectionArg: 127.0.0.1:80
+ApacheErrorLog: /var/log/apache2/error.log
+ApacheTransferLog: /var/log/apache2/access.log
