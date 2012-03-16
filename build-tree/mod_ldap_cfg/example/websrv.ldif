@@ -1,0 +1,282 @@
+dn: cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+cn: websrv.domain.tld:80
+
+dn: ApacheServerName=vhost1.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheModRewriteObj
+objectClass: ApacheModAliasObj
+cn: vhost1.domain.tld
+ApacheServerName: vhost1.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: turbo@bayour.com
+ApacheErrorLog: /var/log/apache/vhost1-error.log
+ApacheTransferLog: /var/log/apache/vhost-access.log
+ApacheRewriteEngine: on
+ApacheRewriteRule: ^/phprecipebook-.*/(.*) http://recept.domain.tld/$1
+ApacheRewriteRule: ^/anthill/(.*) http://vhost3.domain.tld/$1
+ApacheRewriteRule: ^/anthill-0\.2.*/(.*) http://vhost3.domain.tld$1
+ApacheAlias: /cvsweb /usr/share/cvsweb
+ApacheDocumentRoot: /var/www
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=vhost2.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: vhost2.domain.tld
+ApacheServerName: vhost2.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: girlfriend@somedomain.tld
+ApacheErrorLog: /var/log/apache/vhost2-error.log
+ApacheTransferLog: /var/log/apache/vhost2-access.log
+ApacheDocumentRoot: /var/www/vhost2
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=vhost3.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: vhost3.domain.tld
+ApacheServerName: vhost3.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: turbo@bayour.com
+ApacheErrorLog: /var/log/apache/vhost3-error.log
+ApacheTransferLog: /var/log/apache/vhost3-access.log
+ApacheDocumentRoot: /var/www/anthill
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=vhost4.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: vhost4.domain.tld
+ApacheServerName: vhost4.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: turbo@bayour.com
+ApacheErrorLog: /var/log/apache/vhost4-error.log
+ApacheTransferLog: /var/log/apache/vhost4_demo-access.log
+ApacheDocumentRoot: /var/www/vhost4
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=vhost5.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: vhost5.domain.tld
+ApacheServerName: vhost5.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: admin-vhost5@domain.tld
+ApacheDocumentRoot: /var/www/vhost5
+ApacheErrorLog: /var/log/apache/error-vhost5.log
+ApacheTransferLog: /var/log/apache/access-vhost5.log
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=www.vhost5.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: www.vhost5.domain.tld
+ApacheServerName: www.vhost5.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: admin-vhost5@domain.tld
+ApacheDocumentRoot: /var/www/vhost5
+ApacheErrorLog: /var/log/apache/error-vhost5.log
+ApacheTransferLog: /var/log/apache/access-vhost5.log
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=vhost6.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+cn: vhost6.domain.tld
+ApacheServerName: vhost6.domain.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: turbo@bayour.com
+ApacheErrorLog: /var/log/apache/vhost6-error.log
+ApacheTransferLog: /var/log/apache/vhost6-access.log
+ApacheDocumentRoot: /var/www/vhost6
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=www.domain2.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerName: www.domain2.tld
+ApacheServerAdmin: admin@domain2.tld
+ApacheDocumentRoot: /var/www/domain2
+cn: www.domain2.tld
+ApacheSectionName: VirtualHost
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: device
+ApacheServerAlias: domain2.tld
+ApacheErrorLog: /var/log/apache/error-domain2.log
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=user1.domain3.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerName: user1.domain3.tld
+ApacheServerAdmin: user1@domain3.tld
+ApacheDocumentRoot: /var/www/domain3/user1
+cn: user1.domain3.tld
+ApacheSectionName: VirtualHost
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: device
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=www.domain4.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerName: www.domain4.tld
+ApacheServerAdmin: admin@domain4.tld
+ApacheDocumentRoot: /var/www/domain4
+cn: www.domain4.tld
+ApacheSectionName: VirtualHost
+ApacheServerAlias: domain4.tld
+ApacheSectionArg: 1.2.3.4:80
+ApacheErrorLog: /var/log/apache/error-domain4.log
+ApacheTransferLog: /var/log/apache/access-domain4.log
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheModAliasObj
+ApacheAlias: /images /var/www/domain4/images
+
+dn: ApacheServerName=www.domain5.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerName: www.domain5.tld
+ApacheServerAdmin: admin@domain5.tld
+ApacheDocumentRoot: /var/www/domain5/
+cn: www.domain5.tld
+ApacheSectionName: VirtualHost
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: device
+ApacheServerAlias: phpqladmin.com
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=www.domain6.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerName: www.domain6.tld
+ApacheServerAdmin: admin@domain6.tld
+ApacheDocumentRoot: /var/www/domain6
+cn: www.domain6.tld
+ApacheSectionName: VirtualHost
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: device
+ApacheServerAlias: thegamestudio.com
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheServerName=www.domain7.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+ApacheServerAdmin: admin@domain7.tld
+ApacheDocumentRoot: /var/www/domain7
+cn: machineworx.com
+ApacheSectionName: VirtualHost
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: device
+ApacheServerAlias: domain7.tld
+ApacheServerName: www.domain7.tld
+ApacheSectionArg: 1.2.3.4:80
+
+dn: ApacheSectionArg=/server-status,ApacheServerName=vhost1.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheDirectoryObj
+objectClass: ApacheModMimeObj
+objectClass: ApacheModAccessObj
+cn: /server-status
+ApacheSectionArg: /server-status
+ApacheSectionName: Location
+ApacheSetHandler: server-status
+ApacheOrder: deny,allow
+ApacheDeny: from all
+ApacheAllow: from .domain.tld
+
+dn: ApacheSectionArg=/mrtg,ApacheServerName=vhost1.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheDirectoryObj
+objectClass: ApacheModAccessObj
+cn: /mrtg
+ApacheSectionArg: /mrtg
+ApacheSectionName: Location
+ApacheOrder: deny,allow
+ApacheDeny: from all
+ApacheOptions: Indexes MultiViews
+ApacheAllow: from 192.168.1
+
+dn: ApacheSectionArg=/rdd,ApacheServerName=vhost1.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheDirectoryObj
+objectClass: ApacheModAccessObj
+cn: /rdd
+ApacheSectionArg: /rdd
+ApacheSectionName: Location
+ApacheOrder: deny,allow
+ApacheDeny: from all
+ApacheOptions: Indexes MultiViews
+ApacheAllow: from 192.168.1
+
+dn: ApacheSectionArg=/doc,ApacheServerName=vhost1.domain.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheDirectoryObj
+objectClass: ApacheModAccessObj
+cn: /doc
+ApacheSectionArg: /doc
+ApacheSectionName: Location
+ApacheOrder: deny,allow
+ApacheDeny: from all
+ApacheOptions: Indexes MultiViews
+ApacheAllow: from 192.168.1
+
+dn: ApacheServerName=www.domain8.tld,cn=websrv.domain.tld:80,cn=websrv.domain.tld,ou=Computers,c=SE
+objectClass: device
+objectClass: ApacheSectionObj
+objectClass: ApacheVirtualHostObj
+objectClass: ApacheModLogConfigObj
+objectClass: ApacheModRewriteObj
+cn: www.domain8.tld
+ApacheServerName: www.domain8.tld
+ApacheSectionName: VirtualHost
+ApacheServerAdmin: admin@domain8.tld
+ApacheDocumentRoot: /var/www/domain8
+ApacheErrorLog: /var/log/apache/error-domain8.log
+ApacheTransferLog: /var/log/apache/access-domain8.log
+ApacheRewriteEngine: on
+ApacheRewriteRule: ^/Pegasos/(.*) /Machines/Pegasos/$1
+ApacheRewriteRule: ^/Blade1000/(.*) /Machines/Blade1000/$1
+ApacheRewriteRule: ^/u10/(.*) /Machines/u10/$1
+ApacheRewriteRule: ^/AmigaONE/(.*) /Machines/AmigaONE/$1
+ApacheRewriteRule: ^/EasyServerII/(.*) /Machines/EasyServerII/$1
+ApacheRewriteRule: ^/Cluster/(.*) /Machines/Cluster/$1
+ApacheRewriteRule: ^/Implementing_LDAPv3/(.*) /LDAPv3/Implementing_LDAPv3/$1
+ApacheRewriteRule: ^/openldap/(.*) /LDAPv3/openldap/$1
+ApacheRewriteRule: ^/kerberos/(.*) /LDAPv3/kerberos/$1
+ApacheRewriteRule: ^/bind9-snmp/(.*) /Softwares/bind9-snmp/$1
+ApacheRewriteRule: ^/bacula-snmp/(.*) /Softwares/bacula-snmp/$1
+ApacheRewriteRule: ^/tcpquota/(.*) /Softwares/tcpquota/$1
+ApacheRewriteRule: ^/xadmin/(.*) /Softwares/xadmin/$1
+ApacheRewriteRule: ^/xezmlm/(.*) /Softwares/xezmlm/$1
+ApacheRewriteRule: ^/reportmagic/(.*) /Softwares/reportmagic/$1
+ApacheRewriteRule: ^/nagios/(.*) /Softwares/nagios/$1
+ApacheRewriteRule: ^/anthill/(.*) /Softwares/anthill/$1
+ApacheRewriteRule: ^/pnp-dists/(.*) /Softwares/pnp-dists/$1
+ApacheRewriteRule: ^/ssl-certs/(.*) /Softwares/ssl-certs/$1
+ApacheRewriteRule: ^/dnssec-tools/(.*) /Softwares/dnssec-tools/$1
+ApacheRewriteRule: ^/firewall/(.*) /Softwares/firewall/$1
+ApacheSectionArg: 1.2.3.4:80
+ApacheServerAlias: domain8.tld
+
